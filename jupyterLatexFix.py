@@ -11,9 +11,7 @@ imports = []
 
 
 #pattern1dollar = "[^0-9a-zA-Z?]\$(.*)\$[^\$0-9a-zA-Z?]"
-
 pattern1dollar = "[^\$0-9a-zA-Z?]\$(.*?)\$[^\$0-9?]"
-patternDollar2 = "[^\$0-9a-zA-Z?]\$\$(.*?)\$\$[^\$0-9?]"
 
 #Fix equations and add bold & style
 for file in files:
