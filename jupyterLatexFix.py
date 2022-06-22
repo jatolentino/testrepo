@@ -13,6 +13,7 @@ imports = []
 #pattern1dollar = "[^0-9a-zA-Z?]\$(.*)\$[^\$0-9a-zA-Z?]"
 
 pattern1dollar = "[^\$0-9a-zA-Z?]\$(.*?)\$[^\$0-9?]"
+patternDollar2 = "[^\$0-9a-zA-Z?]\$\$(.*?)\$\$[^\$0-9?]"
 
 #Fix equations and add bold & style
 for file in files:
@@ -21,7 +22,7 @@ for file in files:
         
         # Delete bolds from jupyter
         lines = lines.replace("**", "")
-        
+        lines = lines.replace("$$", "\n$$\n")
         # Fix equation title list(filter(None, ))
         
         arrayDollars = list(filter(None,re.findall(pattern1dollar, lines) ))
@@ -43,4 +44,9 @@ for file in files:
                 f.write(lines)
 
 
-
+for file in files:
+    with open(os.path.join(folder, file), mode="r") as f:
+        lines = f.read()
+        textWithoutStyle = re.sub('<style scoped>(\n.*?)*?\n</style>\n', '', lines, flags=re.MULTILINE)
+        with open(os.path.join(folder, file), mode="w") as f:
+            f.write(textWithoutStyle )
